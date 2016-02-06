@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Critique</title>
+
+  <!-- External Imports: Jquery-->
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <!-- Internal Imports: Favicon, CSS, JavaScript -->
+    <link rel="shortcut icon" href="static/images/eklogo.ico" type="image/x-icon" />
+    <link href="static/css/style.css" rel="stylesheet"/>
+    <link href="static/css/fonts.css" rel="stylesheet"/>
+    <script src="static/javascript/script.js" type="text/javascript"></script>
+
+    <!-- Fonts: Quicksand, Muli, Open Sans, Lato -->
+    <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+    <link href="http://fonts.googleapis.com/css?family=Muli:300,400" rel="stylesheet" type="text/css"/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
+
+    <!-- Font Awesome for Icons -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="content">
+{% if not results %}
+  <form action="/" method="post">
+            <input style="padding: 2em; max-width: 50%; margin: 0 auto" type="text" placeholder="Search for your idea" name="query" required/>
+            <button style="padding: 2em; background: orange" type="submit">Search</button>
+        </form>
+{% else %}
+  {% for article in results %}
+  <div class="article_list">
+  <form action="/check_review/{{article.link.url}}" method="post">
+    {{ article['display_title'] }} by {{article.byline}}  (<a href="{{article.link.url}}">link</a>)
+  <button style="padding: 1em; background: orange" type="submit">Get Details</button>
+  </div>
+  {% endfor %}
+{% endif %}
+</div>
+</body>
+</html>
